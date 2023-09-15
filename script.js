@@ -1,28 +1,52 @@
 const API_LINK = "https://dailyprayer.abdulrcs.repl.co/api/paris";
 
-fetch(API_LINK)
-   .then(response => response.json())
-   .then(json => console.log(JSON.stringify(json)));
+async function logPrayers() {
+   const response = await fetch(API_LINK);
+   const prayers = await response.json();
+   console.log(prayers);
+}
+logPrayers();
 
-async function getPrayers() {
-   let url = 'https://dailyprayer.abdulrcs.repl.co/api/paris';
-   try {
-      let res = await fetch(url);
-      return await res.json(); 
-   } catch (error) {
-      console.log(error);
-   }
+
+
+
+async function Prayers(){
+   const response = await fetch(API_LINK);
+   const obj = await response.json();
+   
+   console.log(obj.today.Fajr);
+   // Expected output: 42
+   
+   console.log(obj.today.Dhuhr);
+   // Expected output: true
+   
+   
 }
 
- async function renderPrayers() {
-   let prayers = await getPrayers();
+Prayers();
+
+
+
+
+
+
+
+
+
+async function renderPrayers() {
+   const response = await fetch(API_LINK);
+   const obj = await response.json();
    
+   
+  
+   
+
       let htmlSegment = `<div class="prayer">
-                        <h2>Fajr : ${prayers.data.today.Fajr} <h2>
-                        <h2>Dhuhr : ${prayers.data.today.Dhuhr} <h2>
-                        <h2>Asr : ${prayers.data.today.Asr} <h2>
-                        <h2>Maghrib : ${prayers.data.today.Maghrib} <h2>
-                        <h2>Isha : ${prayers.data.today.Isha} <h2>
+                        <h2>Fajr : ${obj.today.Fajr} <h2>
+                        <h2>Dhuhr : ${obj.today.Dhuhr} <h2>
+                        <h2>Asr : ${obj.today.Asr} <h2>
+                        <h2>Maghrib : ${obj.today.Maghrib} <h2>
+                        <h2>Isha :  <h2> 
                         </div>`;
          
                         let container = document.querySelector('.container');
@@ -33,4 +57,5 @@ async function getPrayers() {
 
 
 renderPrayers();
+
 
