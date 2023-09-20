@@ -37,7 +37,10 @@ async function renderPrayers() {
    const response = await fetch(API_LINK);
    const obj = await response.json();
    
-   
+   obj['today.isha'] = obj["today.Isha\'a"];
+   delete obj["today.Isha\'a"];
+
+   console.log(obj.today.isha); // { newKey: 'value' }
   
    
 
@@ -46,7 +49,7 @@ async function renderPrayers() {
                         <h2>Dhuhr : ${obj.today.Dhuhr} <h2>
                         <h2>Asr : ${obj.today.Asr} <h2>
                         <h2>Maghrib : ${obj.today.Maghrib} <h2>
-                        <h2>Isha :  <h2> 
+                        <h2>Isha : ${obj.today.isha} <h2> 
                         </div>`;
          
                         let container = document.querySelector('.container');
